@@ -27,9 +27,9 @@ class BlogCategoryRepository extends CoreRepository
 
     public function getForComboBox()
     {
-        $columns = implode(', ', ['id', 'CONCAT (id, ". ", title) AS id_title']);
+        $columns = ['id', 'title'];
 
-        $result[] = $this
+        $result = $this
             ->startConditions()
             ->select($columns)//не нужно агрегировать полученные данные в объекты класса BaseCategory и будет просто stdClass. Без этого будет коллекция BlogCategory
             ->toBase()

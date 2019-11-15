@@ -29,12 +29,15 @@ class BlogPostRepository extends CoreRepository
             'user_id',
             'category_id',
         ];
+
         $result = $this->startConditions()
             ->select($columns)
             ->orderBy('id', 'DESC')
             ->with(['category:id,title', 'user:id,name']) //для lazy load(жадной загрузки). Указать в модели "return $this->belongsTo()" выбрали по два поля из каждой таблицы
             ->paginate(25);
 //        ->get();
+
+
         return $result;
     }
 }
