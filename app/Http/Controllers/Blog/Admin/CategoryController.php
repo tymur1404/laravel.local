@@ -101,7 +101,8 @@ class CategoryController extends BaseController
 
         $categoryList = $categoryRepository->getForComboBox();
 
-        return view('blog.admin.categories.edit', compact('item', 'categoryList'));
+        return view('blog.admin.categories.edit',
+            compact('item', 'categoryList'));
     }
 
     /**
