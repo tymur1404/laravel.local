@@ -34,7 +34,7 @@
                                    type="text"
                                    class="form-control"
                                    minlength="3"
-                                   required>
+                                   >
                         </div>
 
                         <div class="form-group">
@@ -42,7 +42,7 @@
                             <textarea name="content_raw"
                                       id="content_raw"
                                       rows="20"
-                                      class="form-control">{{ old('content_raw', $item->content_raw) }} </textarea>
+                                      class="form-control">{{ old('content_raw', $item->content_raw) }}</textarea>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="adddata" role="tabpanel">
@@ -52,7 +52,7 @@
                                     id="category_id"
                                     class="form-control"
                                     placeholder="Выберете категорию"
-                                    required>
+                                    >
                                 @foreach($categoryList as $categoryOption)
                                     <option value="{{ $categoryOption->id }}"
                                             @if($categoryOption->id == $item->category_id) selected @endif>
@@ -83,13 +83,14 @@
                             <input name="is_published"
                                    type="hidden"
                                    value="0">
-                            <input name="is_publised"
+
+                            <input name="is_published"
                                    type="checkbox"
                                    class="form-check-input"
-                                   value="{{ $item->is_published }}"
+                                   value="1"
                                    @if($item->is_published)
-                                   checked="checked"
-                                @endif>
+                                        checked="checked"
+                                   @endif>
                             <label class="form-check-label" for="is_published">Опубликовано</label>
                         </div>
                     </div>
