@@ -77,7 +77,6 @@ class PostController extends BaseController
         }
 
         $categoryList = $this->blogPostRepository->getForComboBox();
-
         return view('blog.admin.posts.edit',
             compact('item', 'categoryList'));
     }
@@ -91,7 +90,7 @@ class PostController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        dd(__METHOD__, $request->all(), $id);
     }
 
     /**
@@ -102,6 +101,6 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        //
+        dd(__METHOD__,$id, request()->all() );
     }
 }
