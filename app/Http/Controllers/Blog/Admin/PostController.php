@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Blog\Admin;
 
+use App\Http\Requests\BlogPostUpdateRequest;
 use App\Repositories\BlogPostRepository;
 use App\Repositories\BlogCategoryRepository;
+use App\Observers\BlogPostObserver;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PostController extends BaseController
@@ -88,9 +91,37 @@ class PostController extends BaseController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BlogPostUpdateRequest $request, $id)
     {
-        dd(__METHOD__, $request->all(), $id);
+        $item = $this->blogPostRepository->getEdit($id);
+
+        if (empty($item)) {
+            return back()
+                ->withErrors(['msg' => "Запись id=[{$id}] не найдена"])
+                ->withInput();
+        }
+
+        $data = $request->all();
+        //observer
+//        if (empty($data['slug'])) {
+//            $data['slug'] = \Str::slug($data['title']);
+//        }
+//        if (empty($item->published_at) && $data['is_published']) {
+//            $data['published_at'] = Carbon::now();
+//        }
+
+        $result = $item->update($data);
+//        dd($data);
+
+        if($result){
+            return redirect()
+                ->route('blog.admin.posts.edit', $item)
+                ->with(['success' => 'Успешно сохранено']);
+        } else {
+            return back()
+                ->withErrors(['msg' => 'Ощибка сохранения'])
+                ->withInput();
+        }
     }
 
     /**
@@ -101,6 +132,6 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        dd(__METHOD__,$id, request()->all() );
+        dd(__METHOD__, $id, request()->all());
     }
 }
