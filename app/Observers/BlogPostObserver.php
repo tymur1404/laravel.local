@@ -52,7 +52,7 @@ class BlogPostObserver
         // return false; // если не правильный результат
     }
 
-    public function setPublishedAt(BlogPost $blogPost)
+    protected function setPublishedAt(BlogPost $blogPost)
     {
         $needSetPublished = empty($blogPost->published_at) && $blogPost->is_published;
 
@@ -61,7 +61,7 @@ class BlogPostObserver
         }
     }
 
-    public function setSlug(BlogPost $blogPost)
+    protected function setSlug(BlogPost $blogPost)
     {
         if(empty($blogPost->slug)){
             $blogPost->slug = \Str::slug($blogPost->title);
