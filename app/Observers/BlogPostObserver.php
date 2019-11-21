@@ -26,7 +26,7 @@ class BlogPostObserver
      */
     public function updated(BlogPost $blogPost)
     {
-        dd('updated observer');
+        //dd('updated observer', $blogPost);
     }
 
     /**
@@ -38,21 +38,25 @@ class BlogPostObserver
 
     public function updating(BlogPost $blogPost)
     {
-        $test[] = $blogPost->isDirty();  //изменялась или нет. Если да true
-        $test[] = $blogPost->isDirty('is_published'); //изменялось ли поле is_published
-        $test[] = $blogPost->isDirty('user_id'); //изменялось ли поле user_id
-        $test[] = $blogPost->getAttribute('is_published'); // получаем значение уже измененного атрибута
-        $test[] = $blogPost->is_published; //Тоже самое  получаем значение уже измененного атрибута
-        $test[] = $blogPost->getOriginal('is_published'); // старое значение
-        dd($test);
+//        $test[] = $blogPost->isDirty();  //изменялась или нет. Если да true
+//        $test[] = $blogPost->isDirty('is_published'); //изменялось ли поле is_published
+//        $test[] = $blogPost->isDirty('user_id'); //изменялось ли поле user_id
+//        $test[] = $blogPost->getAttribute('is_published'); // получаем значение уже измененного атрибута
+//        $test[] = $blogPost->is_published; //Тоже самое  получаем значение уже измененного атрибута
+//        $test[] = $blogPost->getOriginal('is_published'); // старое значение
+//        dd($test);
 
         $this->setPublishedAt($blogPost);
         $this->setSlug($blogPost);
+
+        // return false; // если не правильный результат
     }
 
     public function setPublishedAt(BlogPost $blogPost)
     {
-        if(empty($blogPost->published_at) && $blogPost->is_published){
+        $needSetPublished = empty($blogPost->published_at) && $blogPost->is_published;
+
+        if($needSetPublished){
             $blogPost->published_at = Carbon::now();
         }
     }
