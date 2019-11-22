@@ -74,9 +74,7 @@
                             <textarea name="excerpt"
                                       id="excerpt"
                                       class="form-control"
-                                      row="3">
-                                {{ old('excerpt', $item->exceprt) }}
-                            </textarea>
+                                      row="3">{{ old('excerpt', $item->exceprt) }}</textarea>
                         </div>
 
                         <div class="form-check">

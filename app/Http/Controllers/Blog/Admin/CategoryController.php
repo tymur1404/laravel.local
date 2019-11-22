@@ -61,9 +61,6 @@ class CategoryController extends BaseController
     {
         $data = $request->input();
 
-//        if (empty($data['slug'])) {
-//            $data['slug'] = str_slug($data['title']);
-//        }
 
         $item = (new BlogCategory())->create($data); // Создаст и добавит
 
@@ -123,9 +120,6 @@ class CategoryController extends BaseController
 
         $data = $request->all();
 
-//        if (empty($data['slug'])) {
-//            $data['slug'] = str_slug($data['title']);
-//        }
 
         $result = $item->update($data);
         if ($result) {

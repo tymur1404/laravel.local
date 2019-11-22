@@ -26,14 +26,14 @@ class BlogPostCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:5|max:200|unique:blog_post',
+            'title' => 'required|min:5|max:200|unique:blog_posts',
             'slug' => 'max:200',
             'excerpt' => 'max:200',
             'content_raw' => 'required|string|min:5|max:10000',
             'category_id' => 'required|integer|exists:blog_categories,id',//ищет в таблице blog_categories поле id, если нашло, то все ок
         ];
     }
-
+//
     public function messages()
     {
         return [
