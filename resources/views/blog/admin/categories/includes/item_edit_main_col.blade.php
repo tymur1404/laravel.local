@@ -6,7 +6,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <div class="car-title"></div>
+                <div class="card-title"></div>
                 <ul class="nav van-tabs" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" data-toogle="tab" href="#maindata" role="tab">Основные данные</a>
@@ -44,7 +44,7 @@
                                     required>
                                 @foreach($categoryList as $categoryOption)
                                     <option value="{{$categoryOption->id}}" @if($categoryOption->id == $item->parent_id) selected  @endif>
-                                        {{ $categoryOption->title }}
+                                        {{ '#'.$categoryOption->id .' - '. $categoryOption->title }}
                                     </option>
                                 @endforeach
                             </select>
