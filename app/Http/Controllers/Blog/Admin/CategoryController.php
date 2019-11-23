@@ -92,6 +92,21 @@ class CategoryController extends BaseController
 
         $item = $categoryRepository->getEdit($id);
 
+        //вызов BlogCategory -> getTitleAttribute()
+        $v['title_before'] = $item->title;
+
+        $item->title = 'fghdgfhjftkfdrtsdfg asdasdasda 123213';
+
+        $v['title_after'] = $item->title;
+        $v['getAttribute'] = $item->getAttribute('title');
+        $v['attributesToArray'] = $item->attributesToArray();
+        $v['attributes'] = $item->attributes['title'];
+        $v['getAttributeValue'] = $item->getAttributeValue('title');
+        $v['getMutatedAttributes'] = $item->getMutatedAttributes();
+        $v['hasGetMutator'] = $item->hasGetMutator('title');
+        $v['toArray'] = $item->toArray();
+
+        dd($v, $item);
         if (empty($item)) {
             abort(404);//если не нашли модель то 404
         }

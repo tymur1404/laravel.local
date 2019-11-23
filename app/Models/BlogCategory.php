@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class BlogCategory
  * @package App\Models
- * 
+ *
  * для подсказок когда наводишь курсором
  *
  * @property-read BlogCategory $parentCategory
@@ -51,5 +51,32 @@ class BlogCategory extends Model
 
     public function isRoot(){
         return $this->id === BlogCategory::ROOT;
+    }
+
+    /**
+     * @param $valueFromDB
+     *
+     * Пример аксесуара(аксесор)
+     *
+     * @return bool|mixed|null|string|string[]
+     */
+
+    public function getTitleAttribute($valueFromObject){
+
+        return mb_strtoupper($valueFromObject);
+    }
+
+
+    /**
+     * @param $incomingValue
+     *
+     * Пример мутатора
+     *
+     *
+     */
+
+    public function setTitleAttribute($incomingValue){
+
+        $this->attributes['title'] = mb_strtolower($incomingValue);
     }
 }
